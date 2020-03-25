@@ -1,0 +1,31 @@
+<?php 
+$db_user = "root";
+$db_pass = "";
+$db_name = "booking";
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+if(isset($_POST['search']))
+{
+	$txtstartdate =$_POST['txtstartdate'];
+	$txtlastdate =$_POST['txtlastdate'];
+	$sql="INSERT INTO addemp(txtstartdate,txtlastdate)VALUES(?,?)";
+	$stmtinsert =$db->prepare($sql);
+	$result=$stmtinsert->execute([$txtstartdate,txtlastdate]);
+	
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+<h1>BOOKING</h1>
+</head>
+<form method="post">
+<input type="date" name="txtstartdate">
+<input type="date" name="txtlastdate">
+<p>
+<input type="submit" name="search" value="submit">
+</p>
+</form>
+</html>
